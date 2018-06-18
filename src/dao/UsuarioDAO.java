@@ -35,4 +35,22 @@ public class UsuarioDAO {
             throw new RuntimeException(ex);
         }
     }
+    
+    public ArrayList<Usuario> procuraUsuario(){
+        String sql = "SELECT * FROM usuarios";
+        ArrayList<Usuario> usuario = new ArrayList();
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                usuario.add(new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("senha")));
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
 }

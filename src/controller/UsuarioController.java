@@ -7,6 +7,7 @@ package controller;
 
 import dao.UsuarioDAO;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Usuario;
 
 /**
@@ -23,6 +24,8 @@ public class UsuarioController {
         return user;
     }*/
     
+    
+    
     public void adicionaUsuario(String nome, String senha){              
         // Validação
         if(nome.isEmpty() || senha.isEmpty() ){
@@ -36,6 +39,30 @@ public class UsuarioController {
             UsuarioDAO dao = new UsuarioDAO();
             dao.addUsuario(usuario);
             JOptionPane.showMessageDialog(null, "Usuario " +nome+ " salvo com sucesso!");
+        }
+    }
+    
+    public void search(javax.swing.JComboBox box){
+        
+        box.removeAllItems();
+        
+        UsuarioDAO dao = new UsuarioDAO();
+        
+        for(Usuario p: dao.procuraUsuario()){
+            box.addItem(p.getId() + " - "+p.getNome());
+        }
+        
+    }
+    
+    public void verTabela(DefaultTableModel modelo){
+        modelo.setNumRows(0);
+        UsuarioDAO dao = new UsuarioDAO();
+        
+        for(Usuario user : dao.procuraUsuario()){
+            modelo.addRow(new Object[]{
+                user.getId(),
+                user.getNome()
+            });
         }
     }
     
