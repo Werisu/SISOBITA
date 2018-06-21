@@ -24,7 +24,7 @@ public class UsuarioController {
         return user;
     }*/
     
-    
+    public int usuarioCount = 0;
     
     public void adicionaUsuario(String nome, String senha){              
         // Validação
@@ -42,16 +42,37 @@ public class UsuarioController {
         }
     }
     
+    public void removeUsuario(Usuario usuario){
+        int isDelete = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o usuário " + usuario.getNome() + "?");
+        
+        if(isDelete == JOptionPane.YES_OPTION){
+            
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.removeUsuario(usuario);
+        }
+        
+    }
+    
     public void search(javax.swing.JComboBox box){
         
         box.removeAllItems();
+        box.addItem("Selecione");
         
         UsuarioDAO dao = new UsuarioDAO();
         
         for(Usuario p: dao.procuraUsuario()){
-            box.addItem(p.getId() + " - "+p.getNome());
+            box.addItem(p);
         }
         
+    }
+    
+    public String detalhes(){
+        UsuarioDAO dao = new UsuarioDAO();
+        
+        for(Usuario p : dao.procuraUsuario())
+            this.usuarioCount++;
+        
+        return Integer.toString(usuarioCount);
     }
     
     public void verTabela(DefaultTableModel modelo){
@@ -62,6 +83,20 @@ public class UsuarioController {
             modelo.addRow(new Object[]{
                 user.getId(),
                 user.getNome()
+            });
+        }
+    }
+    
+    public void verTabelaDashboar(DefaultTableModel modelo){
+        modelo.setNumRows(0);
+        UsuarioDAO dao = new UsuarioDAO();
+        
+        for(Usuario user : dao.procuraUsuario()){
+            modelo.addRow(new Object[]{
+                user.getNome() + " " + user.getSobrenome(),
+                user.getId(),
+                "Aguardando...",
+                "R$150"
             });
         }
     }

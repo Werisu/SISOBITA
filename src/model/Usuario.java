@@ -14,6 +14,7 @@ public class Usuario {
     
     protected Integer id;
     protected String nome;
+    protected String sobrenome;
     protected String senha;
 
     
@@ -41,6 +42,15 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario(Integer id, String nome, String sobrenome, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.senha = senha;
+    }
+    
+    public Usuario(){}
+
     public Integer getId() {
         return id;
     }
@@ -64,7 +74,18 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    @Override
+    public String toString() {
+        return getId() + " - "+ getNome(); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -36,6 +36,17 @@ public class UsuarioDAO {
         }
     }
     
+    public void removeUsuario(Usuario usuario){
+        String sql = "DELETE FROM usuarios WHERE id=?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, usuario.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+        }
+    }
+    
     public ArrayList<Usuario> procuraUsuario(){
         String sql = "SELECT * FROM usuarios";
         ArrayList<Usuario> usuario = new ArrayList();
@@ -44,7 +55,7 @@ public class UsuarioDAO {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                usuario.add(new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("senha")));
+                usuario.add(new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("senha")));
             }
             rs.close();
             stmt.close();
