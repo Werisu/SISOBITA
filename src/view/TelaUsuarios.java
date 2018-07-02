@@ -83,7 +83,6 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setClosable(true);
         setMaximizable(true);
         setTitle("Cadastrar Usuarios");
         setVisible(false);
@@ -253,6 +252,11 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         jButton1.setForeground(new java.awt.Color(0, 102, 102));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-editar-propriedade-24.fw.png"))); // NOI18N
         jButton1.setText("Atualizar Dados");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jButton2.setForeground(new java.awt.Color(204, 0, 51));
@@ -388,6 +392,10 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         //----------------------------- RECARREGA BOX
         c.search(box);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
