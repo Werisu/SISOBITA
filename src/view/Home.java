@@ -64,6 +64,9 @@ public class Home extends javax.swing.JFrame {
         indicador3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        botao6 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        indicador6 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -91,6 +94,7 @@ public class Home extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISOBITA");
@@ -243,6 +247,53 @@ public class Home extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-usuário-masculino-tipo-de-pele-com-círculo-6-48.png"))); // NOI18N
         jLabel11.setText("Administrador");
 
+        botao6.setBackground(new java.awt.Color(242, 242, 242));
+        botao6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botao6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botao6MouseEntered(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("Produtos");
+
+        indicador6.setBackground(new java.awt.Color(51, 153, 255));
+        indicador6.setOpaque(false);
+
+        javax.swing.GroupLayout indicador6Layout = new javax.swing.GroupLayout(indicador6);
+        indicador6.setLayout(indicador6Layout);
+        indicador6Layout.setHorizontalGroup(
+            indicador6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        indicador6Layout.setVerticalGroup(
+            indicador6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout botao6Layout = new javax.swing.GroupLayout(botao6);
+        botao6.setLayout(botao6Layout);
+        botao6Layout.setHorizontalGroup(
+            botao6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botao6Layout.createSequentialGroup()
+                .addComponent(indicador6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        botao6Layout.setVerticalGroup(
+            botao6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(indicador6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(botao6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -256,6 +307,7 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(botao6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,6 +325,8 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(botao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botao3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botao6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -474,7 +528,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(pdf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pdf1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
@@ -594,6 +648,9 @@ public class Home extends javax.swing.JFrame {
         jMenu2.setText("Clientes");
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Produtos");
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -619,11 +676,13 @@ public class Home extends javax.swing.JFrame {
         onClick(botao1);
         onLeaveClick(botao2);
         onLeaveClick(botao3);
+        onLeaveClick(botao6);
         
         // indicador
         indicador1.setOpaque(true);
         indicador2.setOpaque(false);
         indicador3.setOpaque(false);
+        indicador6.setOpaque(false);
         
         //dispensa jinternalframe
         addTelaUser.dispose(); // dispensa a tela de cadastro de usuário se estiver ativa
@@ -644,11 +703,13 @@ public class Home extends javax.swing.JFrame {
         onClick(botao2);
         onLeaveClick(botao1);
         onLeaveClick(botao3);
+        onLeaveClick(botao6);
         
         // indicador
         indicador1.setOpaque(false);
         indicador2.setOpaque(true);
         indicador3.setOpaque(false);
+        indicador6.setOpaque(false);
     }//GEN-LAST:event_botao2MouseClicked
 
     private void botao3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao3MouseClicked
@@ -665,11 +726,13 @@ public class Home extends javax.swing.JFrame {
         onClick(botao3);
         onLeaveClick(botao2);
         onLeaveClick(botao1);
+        onLeaveClick(botao6);
         
         // indicador
         indicador1.setOpaque(false);
         indicador2.setOpaque(false);
         indicador3.setOpaque(true);
+        indicador6.setOpaque(false);
     }//GEN-LAST:event_botao3MouseClicked
 
     private void botao1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao1MouseEntered
@@ -677,6 +740,7 @@ public class Home extends javax.swing.JFrame {
         onHouver(jLabel1);
         onLeaveHouver(jLabel2);
         onLeaveHouver(jLabel3);
+        onLeaveHouver(jLabel18);
     }//GEN-LAST:event_botao1MouseEntered
 
     private void botao2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao2MouseEntered
@@ -685,6 +749,7 @@ public class Home extends javax.swing.JFrame {
         onHouver(jLabel2);
         onLeaveHouver(jLabel1);
         onLeaveHouver(jLabel3);
+        onLeaveHouver(jLabel18);
     }//GEN-LAST:event_botao2MouseEntered
 
     private void botao3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao3MouseEntered
@@ -693,6 +758,7 @@ public class Home extends javax.swing.JFrame {
         onHouver(jLabel3);
         onLeaveHouver(jLabel2);
         onLeaveHouver(jLabel1);
+        onLeaveHouver(jLabel18);
     }//GEN-LAST:event_botao3MouseEntered
 
     private void pdf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdf1ActionPerformed
@@ -710,6 +776,27 @@ public class Home extends javax.swing.JFrame {
         addTelaCliente.dispose(); // dispensa tela de clientes se estiver ativa
         jPanel2.setVisible(false); // esconde home
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void botao6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao6MouseClicked
+        onClick(botao6);
+        onLeaveClick(botao2);
+        onLeaveClick(botao1);
+        onLeaveClick(botao3);
+        
+        // indicador
+        indicador1.setOpaque(false);
+        indicador2.setOpaque(false);
+        indicador3.setOpaque(false);
+        indicador6.setOpaque(true);
+    }//GEN-LAST:event_botao6MouseClicked
+
+    private void botao6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao6MouseEntered
+        botao6.setCursor(new Cursor(12));
+        onHouver(jLabel18);
+        onLeaveHouver(jLabel2);
+        onLeaveHouver(jLabel1);
+        onLeaveHouver(jLabel3);
+    }//GEN-LAST:event_botao6MouseEntered
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(153,204,255));
@@ -765,17 +852,26 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel botao1;
     private javax.swing.JPanel botao2;
     private javax.swing.JPanel botao3;
+    private javax.swing.JPanel botao4;
+    private javax.swing.JPanel botao5;
+    private javax.swing.JPanel botao6;
     private javax.swing.JPanel indicador1;
     private javax.swing.JPanel indicador2;
     private javax.swing.JPanel indicador3;
+    private javax.swing.JPanel indicador4;
+    private javax.swing.JPanel indicador5;
+    private javax.swing.JPanel indicador6;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -786,6 +882,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
