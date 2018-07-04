@@ -25,7 +25,7 @@ public class ProdutoController {
         }else{
             ProdutoDAO dao = new ProdutoDAO();
             dao.addProduto(produto);
-            JOptionPane.showMessageDialog(null, "Usuario " +produto.getNome()+ " cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Produto " +produto.getNome()+ " cadastrado com sucesso!");
         }
         
     }

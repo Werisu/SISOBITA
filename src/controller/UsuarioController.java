@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.HomeDAO;
 import dao.UsuarioDAO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -90,15 +91,9 @@ public class UsuarioController {
     public void verTabelaDashboar(DefaultTableModel modelo){
         modelo.setNumRows(0);
         UsuarioDAO dao = new UsuarioDAO();
+        HomeDAO hdao = new HomeDAO();
         
-        for(Usuario user : dao.procuraUsuario()){
-            modelo.addRow(new Object[]{
-                user.getNome() + " " + user.getSobrenome(),
-                user.getId(),
-                "Aguardando...",
-                "R$150"
-            });
-        }
+        hdao.procuraDadosTableHome(modelo);
     }
     
 }
