@@ -5,6 +5,12 @@
  */
 package view;
 
+import controller.ProdutoController;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import model.Produto;
+
 /**
  *
  * @author Wellysson
@@ -14,8 +20,16 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaProduto
      */
+    ProdutoController pc = new ProdutoController();
+    DefaultTableModel modelo;
+    
     public TelaProduto() {
         initComponents();
+        
+        this.modelo = (DefaultTableModel) tableProdutos.getModel();
+        tableProdutos.setRowSorter(new TableRowSorter(modelo));
+        
+        pc.verTabela(modelo);
     }
 
     /**
@@ -48,6 +62,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setResizable(true);
         setTitle("Tela de Produtos");
         setPreferredSize(new java.awt.Dimension(642, 421));
 
@@ -61,6 +76,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         jLabel1.setText("ID");
 
         id.setEditable(false);
+        id.setBackground(new java.awt.Color(204, 204, 204));
         id.setToolTipText("Código do Produto");
 
         jLabel2.setText("Descrição");
@@ -267,11 +283,23 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+        Produto produto = new Produto(null, nome.getText(), Integer.parseInt(quantidade.getText()), Double.parseDouble(valor.getText()));
+        pc.adicionaProduto(produto);
         
+        nome.setText("");
+        quantidade.setText("");
+        valor.setText("");
+        
+        //----------------------------- RECARREGA TABLE
+        tableProdutos.setRowSorter(new TableRowSorter(this.modelo));
+        pc.verTabela(modelo);
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimparActionPerformed
-        
+        id.setText("");
+        nome.setText("");
+        quantidade.setText("");
+        valor.setText("");
     }//GEN-LAST:event_botaoLimparActionPerformed
 
     private void botaoLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpar1ActionPerformed

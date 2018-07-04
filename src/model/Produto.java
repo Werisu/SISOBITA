@@ -13,14 +13,14 @@ public class Produto {
     
     protected Integer id;
     protected String nome;
-    protected String quanditade;
-    protected String valor;
+    protected int quanditade;
+    protected double valor;
 
-    public Produto(Integer id, String nome, String quanditade, String senha) {
+    public Produto(Integer id, String nome, int quanditade, double valor) {
         this.id = id;
         this.nome = nome;
         this.quanditade = quanditade;
-        this.valor = senha;
+        this.valor = valor;
     }
 
     public Integer getId() {
@@ -39,19 +39,19 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getQuanditade() {
+    public int getQuanditade() {
         return quanditade;
     }
 
-    public void setQuanditade(String quanditade) {
+    public void setQuanditade(int quanditade) {
         this.quanditade = quanditade;
     }
 
-    public String getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
     

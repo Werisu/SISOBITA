@@ -28,6 +28,7 @@ public class Home extends javax.swing.JFrame {
     DefaultTableModel modelo;
     TelaUsuarios addTelaUser = new TelaUsuarios();
     TelaCliente addTelaCliente = new TelaCliente();
+    TelaProduto addTelaProduto = new TelaProduto();
     public Home() {
         initComponents();
         
@@ -687,6 +688,7 @@ public class Home extends javax.swing.JFrame {
         //dispensa jinternalframe
         addTelaUser.dispose(); // dispensa a tela de cadastro de usuário se estiver ativa
         addTelaCliente.dispose(); // dispensa a tela de cadastro de clientes se estiver ativa
+        addTelaProduto.dispose();// dispensa a tela de cadastro de produtos se estiver ativa
         jPanel2.setVisible(true); // mostra home
     }//GEN-LAST:event_botao1MouseClicked
 
@@ -698,6 +700,7 @@ public class Home extends javax.swing.JFrame {
         jDesktopPane1.add(addTelaUser); // colocando dentro da area de trabalho  
         
         addTelaCliente.dispose(); // dispensa tela de clientes se estiver ativa
+        addTelaProduto.dispose();
         jPanel2.setVisible(false); // esconde home
         
         onClick(botao2);
@@ -722,6 +725,7 @@ public class Home extends javax.swing.JFrame {
         // desativa o jPanel2 e dispensa os demais internal frame
         jPanel2.setVisible(false); // esconde home
         addTelaUser.dispose(); // dispensa tela de cadastro de usuario se estiver ativa
+        addTelaProduto.dispose();
         
         onClick(botao3);
         onLeaveClick(botao2);
@@ -774,10 +778,20 @@ public class Home extends javax.swing.JFrame {
         jDesktopPane1.add(addTelaUser); // colocando dentro da area de trabalho  
         
         addTelaCliente.dispose(); // dispensa tela de clientes se estiver ativa
+        addTelaProduto.dispose();
         jPanel2.setVisible(false); // esconde home
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void botao6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao6MouseClicked
+        
+        this.getContentPane().add(addTelaProduto); // trazendo a telaProdutos
+        addTelaProduto.setVisible(true); // exibindo a telaProdutos
+        jDesktopPane1.add(addTelaProduto); // colocando dentro da area de trabalho
+        
+        // retirando outras telas
+        addTelaUser.dispose();
+        addTelaCliente.dispose();
+        
         onClick(botao6);
         onLeaveClick(botao2);
         onLeaveClick(botao1);
@@ -788,6 +802,8 @@ public class Home extends javax.swing.JFrame {
         indicador2.setOpaque(false);
         indicador3.setOpaque(false);
         indicador6.setOpaque(true);
+        
+         jPanel2.setVisible(false); // esconde home
     }//GEN-LAST:event_botao6MouseClicked
 
     private void botao6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botao6MouseEntered
@@ -852,14 +868,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel botao1;
     private javax.swing.JPanel botao2;
     private javax.swing.JPanel botao3;
-    private javax.swing.JPanel botao4;
-    private javax.swing.JPanel botao5;
     private javax.swing.JPanel botao6;
     private javax.swing.JPanel indicador1;
     private javax.swing.JPanel indicador2;
     private javax.swing.JPanel indicador3;
-    private javax.swing.JPanel indicador4;
-    private javax.swing.JPanel indicador5;
     private javax.swing.JPanel indicador6;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
@@ -867,10 +879,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

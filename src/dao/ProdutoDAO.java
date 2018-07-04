@@ -32,12 +32,32 @@ public class ProdutoDAO {
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, produto.getNome());
-            stmt.setString(2, produto.getQuanditade());
-            stmt.setString(3, produto.getValor());
+            stmt.setInt(2, produto.getQuanditade());
+            stmt.setDouble(3, produto.getValor());
             stmt.execute();
             stmt.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao adicionar produto: " + ex.getMessage());
         }
+    }
+    
+    public ArrayList<Produto> procuraProduto(){
+        String sql = "SELECT * FROM tbl_produtos";
+        ArrayList<Produto> produto = new ArrayList();
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                produto.add(new Produto(rs.getInt("id"), rs.getString("nome"), rs.getInt("quantidade"), rs.getDouble("valor")));
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na tabela: " + ex);
+            throw new RuntimeException(ex);
+        }
+        
+        return produto;
     }
 }
