@@ -17,13 +17,13 @@ import model.Usuario;
  */
 public class UsuarioController {
     
-    /*
+    
     public Usuario verificarUsuario(String login, String senha){
         UsuarioDAO dao = new UsuarioDAO();
-        Usuarios usuario = new Usuarios(login, senha);
-        Usuarios user = dao.verificaUsuario(usuario);
+        Usuario usuario = new Usuario(login, senha);
+        Usuario user = dao.verificaUsuario(usuario);
         return user;
-    }*/
+    }
     
     public int usuarioCount = 0;
     

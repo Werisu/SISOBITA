@@ -110,7 +110,9 @@ public class Home extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         botaobk = new javax.swing.JMenuItem();
 
@@ -576,7 +578,7 @@ public class Home extends javax.swing.JFrame {
         imprimeRelatorioFuncionarioOS.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         imprimeRelatorioFuncionarioOS.setForeground(new java.awt.Color(0, 102, 102));
         imprimeRelatorioFuncionarioOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-pdf-2-24.png"))); // NOI18N
-        imprimeRelatorioFuncionarioOS.setText("Imprimir");
+        imprimeRelatorioFuncionarioOS.setText("Gerar Relatório");
         imprimeRelatorioFuncionarioOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 imprimeRelatorioFuncionarioOSActionPerformed(evt);
@@ -695,10 +697,9 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jMenu1.setForeground(new java.awt.Color(0, 102, 102));
         jMenu1.setText("Usuarios");
 
-        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jMenuItem1.setForeground(new java.awt.Color(0, 102, 102));
         jMenuItem1.setText("Cadastrar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -709,12 +710,33 @@ public class Home extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setForeground(new java.awt.Color(0, 102, 102));
         jMenu2.setText("Clientes");
+
+        jMenuItem2.setText("Cadastrar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setForeground(new java.awt.Color(0, 102, 102));
         jMenu3.setText("Produtos");
+
+        jMenuItem3.setText("Cadastrar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setForeground(new java.awt.Color(0, 102, 102));
         jMenu4.setText("Segurança");
 
         botaobk.setText("Backup");
@@ -969,6 +991,31 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaobkActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        //---------- Adicionando o jInternalFrame Cadastro de Clientes
+        this.getContentPane().add(addTelaCliente); // adiciona a tela interna
+        addTelaCliente.setVisible(true); // seta visivel como true
+        jDesktopPane1.add(addTelaCliente); // coloca dentro da area de trabalho
+        
+        // desativa o jPanel2 e dispensa os demais internal frame
+        jPanel2.setVisible(false); // esconde home
+        addTelaUser.dispose(); // dispensa tela de cadastro de usuario se estiver ativa
+        addTelaProduto.dispose();
+        addTelaOS.dispose();// dispensa a tela de OS
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        this.getContentPane().add(addTelaProduto); // trazendo a telaProdutos
+        addTelaProduto.setVisible(true); // exibindo a telaProdutos
+        jDesktopPane1.add(addTelaProduto); // colocando dentro da area de trabalho
+        
+        // retirando outras telas
+        jPanel2.setVisible(false); // esconde home
+        addTelaUser.dispose(); // dispensa a tela de manter usuário
+        addTelaCliente.dispose(); // dispensa a tela de manter cliente
+        addTelaOS.dispose();// dispensa a tela de OS
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     private void onClick(JPanel panel){
         panel.setBackground(new Color(153,204,255));
     }
@@ -1056,6 +1103,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;

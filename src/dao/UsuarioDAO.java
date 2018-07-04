@@ -15,6 +15,7 @@ import model.Usuario; // importanto modelo de usuario
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
     private Connection connection;
@@ -63,5 +64,31 @@ public class UsuarioDAO {
             throw new RuntimeException(e);
         }
         return usuario;
+    }
+
+    public Usuario verificaUsuario(Usuario u){
+        String sql = "SELECT * FROM usuarios WHERE nome = ? and senha = ?";
+        Usuario usuario = null;
+        
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, u.getNome());
+            stmt.setString(2, u.getSenha());
+            ResultSet rs = stmt.executeQuery();           
+            if (rs.next()) {
+                usuario = new Usuario(rs.getInt("id"),rs.getString("nome"),rs.getString("senha"));
+                //JOptionPane.showMessageDialog(null, "Logado com sucesso! Bem-Vindo "+rs.getString("nome"));
+            }else{
+                JOptionPane.showMessageDialog(null, "Ops, tem algo errado! Verifique novamente.");
+            }
+            rs.close();
+            stmt.close();
+            
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+        
+        return usuario;   
     }
 }
