@@ -53,10 +53,13 @@ public class Login extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Sign in"));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sign in", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Login");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
 
         senha.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -159,7 +162,7 @@ public class Login extends javax.swing.JFrame {
         if(user.getNome() == null){
             JOptionPane.showMessageDialog(null, "Campus Inválido");
         }else{
-            Home main = new Home();
+            Home main = new Home(user);
             main.setVisible(true);
             setVisible(false);
         }
@@ -173,7 +176,7 @@ public class Login extends javax.swing.JFrame {
                 if(user.getNome() == null){
                     JOptionPane.showMessageDialog(null, "Campus Inválido");
                 }else{
-                    Home main = new Home();
+                    Home main = new Home(user);
                     main.setVisible(true);
                     setVisible(false);
                 }

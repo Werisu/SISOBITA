@@ -66,9 +66,36 @@ public class ClienteDAO {
             ResultSet rs = stmt.executeQuery();
             while(rs.next())
                 cliente.add(new Cliente(rs.getInt("id"), rs.getString("nome_completo"), rs.getString("endereco"), rs.getString("telefone")));
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao procurar Cliente" + e.getMessage());
         }
+        
+        
+        return cliente;
+    }
+    
+    public Cliente SelecionaCliente(int idDoCliente){
+        
+        String sql = "SELECT * FROM tbl_cliente WHERE id = ?";
+        //ArrayList<Cliente> cliente = new ArrayList();
+        Cliente cliente = null;
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, idDoCliente);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                cliente = new Cliente(rs.getInt("id"), rs.getString("nome_completo"), rs.getString("endereco"), rs.getString("telefone"));
+            }
+                
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao procurar Cliente" + e.getMessage());
+        }
+        
         
         return cliente;
     }

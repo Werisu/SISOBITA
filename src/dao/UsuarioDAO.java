@@ -11,6 +11,8 @@ import model.Usuario; // importanto modelo de usuario
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
@@ -40,7 +42,24 @@ public class UsuarioDAO {
             stmt.setInt(1, usuario.getId());
             stmt.execute();
             stmt.close();
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problema encontrado: " + ex.getMessage());
+        }
+    }
+    
+    public void atualizarDados(int id, String nome, String senha){
+        String sql = "UPDATE usuarios SET nome=?, senha=? WHERE id=?;";
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, nome);
+            stmt.setString(2, senha);
+            stmt.setInt(3, id);
+            stmt.execute();
+            stmt.close();
+            JOptionPane.showMessageDialog(null, "Usuário: "+id +" - "+ nome +" Atualizado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Problema ao editar o Usuário: "+id +" - "+ nome +"-> " + ex.getMessage());
         }
     }
     

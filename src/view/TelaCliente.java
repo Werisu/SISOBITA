@@ -6,6 +6,8 @@
 package view;
 
 import controller.ClienteController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.Cliente;
@@ -34,6 +36,26 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         tableClientes.setRowSorter(new TableRowSorter(modelo));
         
         c.verTabela(modelo); // pega a tabela de usuários lá no controller
+        
+        tableClientes.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+              if(e.getClickCount() == 2){
+                  nome.setText("");
+                  
+                  int p = tableClientes.getSelectedRow();
+                  
+                  int idDoCliente = Integer.parseInt(tableClientes.getValueAt(p, 0).toString());
+                  System.out.println(idDoCliente);
+                  
+                  Cliente custume = c.pegaCliente(idDoCliente);
+                  
+                  id.setText("" + custume.getId());
+                  nome.setText(custume.getNome());
+                  telefone.setText(custume.getTelefone());
+                  endereco.setText(custume.getEndereco());
+              }
+            }
+        });
     }
 
     /**

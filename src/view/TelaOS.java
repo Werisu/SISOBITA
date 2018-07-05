@@ -8,7 +8,10 @@ package view;
 import controller.OSController;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import model.OS;
 
 /**
@@ -20,19 +23,24 @@ public class TelaOS extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaOS
      */
-    LocalDate hoje = LocalDate.now();
-    LocalTime agora = LocalTime.now();
+    LocalDate hoje;
+    LocalTime agora;
+    ArrayList<Integer> codigos;
     OSController osc = new OSController();
     DefaultTableModel modelo;
     
     public TelaOS() {
         initComponents();
         
+        //ultimo numero de os
+        num_os.setText(""+osc.pegaNumOS());
+        
         status.addItem("Pendente");
         status.addItem("Concluido");
         status.addItem("Cancelado");
         
-        
+        hoje = LocalDate.now();
+        agora = LocalTime.now();
         data.setText("" + hoje);
         hora.setText("" + agora);
     }
@@ -70,9 +78,10 @@ public class TelaOS extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablePecas = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        pecas = new javax.swing.JTextField();
+        verTabela = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         valorServico = new javax.swing.JTextField();
@@ -82,6 +91,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         total = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -98,6 +108,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         num_os.setEditable(false);
         num_os.setBackground(new java.awt.Color(204, 204, 204));
+
+        funcionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                funcionarioActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
@@ -221,30 +237,52 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         tablePecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
-                "Nome"
+                "COD", "Nome", "Valor R$"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tablePecas);
+        if (tablePecas.getColumnModel().getColumnCount() > 0) {
+            tablePecas.getColumnModel().getColumn(0).setMaxWidth(100);
+            tablePecas.getColumnModel().getColumn(2).setMaxWidth(100);
+        }
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel9.setText("Produtos");
+        jLabel9.setText("COD");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        pecas.setToolTipText("Digite o codigo do produto");
+        pecas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                pecasActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Procurar");
+        verTabela.setText("Ver Tabela");
 
-        jButton4.setText("Adicionar");
+        add.setText("Adicionar");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+
+        reset.setText("Limpar");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -252,20 +290,18 @@ public class TelaOS extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 33, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                        .addComponent(add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField6))))
+                        .addComponent(verTabela)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(reset)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pecas))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -274,11 +310,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(verTabela)
+                    .addComponent(add)
+                    .addComponent(reset))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -366,6 +403,13 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton2.setText("Resetar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -379,6 +423,8 @@ public class TelaOS extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,7 +444,9 @@ public class TelaOS extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -432,17 +480,33 @@ public class TelaOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dataActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void pecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pecasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_pecasActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        total.setText("" + valorServico.getText());
+        
         String estado = (String) status.getSelectedItem();
         
         OS os = new OS(0, data.getText(), hora.getText(), Integer.parseInt(cliente.getText()), Integer.parseInt(funcionario.getText()), desc_problema.getText(), desc_servico.getText(), Double.parseDouble(valorServico.getText()), Double.parseDouble(total.getText()), estado);
         
-        osc.adicionaOS(os);
+        osc.adicionaOS(os, codigos,Integer.parseInt(num_os.getText()));
+        
+        // vamos zerar todos os campus? vamos lá
+        num_os.setText("");
+        data.setText("");
+        hora.setText("");
+        cliente.setText("");
+        funcionario.setText("");
+        desc_problema.setText("");
+        desc_servico.setText("");
+        valorServico.setText("");
+        total.setText("");
+        tablePecas.removeAll();
+        
+        num_os.setText(""+osc.pegaNumOS());
+        data.setText("" + hoje);
+        hora.setText("" + agora);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -450,8 +514,74 @@ public class TelaOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_totalActionPerformed
 
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tablePecas.getModel();
+        tablePecas.setRowSorter(new TableRowSorter(modelo));
+        
+        double valor1 = osc.TablePecasSelecionadas(modelo, Integer.parseInt(pecas.getText()));
+        double valor2 = Double.parseDouble(valorServico.getText());
+        double count=0;
+        codigos = new ArrayList();
+        
+        // count
+        for (int i=0; i<=tablePecas.getRowCount()-1;i++) {
+            count+=Double.parseDouble(tablePecas.getValueAt(i, 2).toString());
+        }
+        // cods
+        for(int j=0; j<tablePecas.getRowCount(); j++){
+            codigos.add(Integer.parseInt(tablePecas.getValueAt(j, 0).toString()));
+        }
+        
+        double valor3 = count + valor2;
+        total.setText("" + valor3);
+        
+    }//GEN-LAST:event_addActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        modelo = (DefaultTableModel) tablePecas.getModel();
+        tablePecas.setRowSorter(new TableRowSorter(modelo));
+        modelo.setNumRows(0);
+        osc.TablePecasSelecionadas(modelo, 0);
+        hoje = LocalDate.now();
+        agora = LocalTime.now();
+        data.setText("" + hoje);
+        hora.setText("" + agora);
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // vamos zerar todos os campus? vamos lá
+        num_os.setText("");
+        data.setText("");
+        hora.setText("");
+        cliente.setText("");
+        funcionario.setText("");
+        desc_problema.setText("");
+        desc_servico.setText("");
+        valorServico.setText("");
+        total.setText("");
+        tablePecas.removeAll();
+        
+        num_os.setText(""+osc.pegaNumOS()); // numero OS
+        data.setText("" + hoje); // data
+        hora.setText("" + agora); // hora
+        
+        modelo = (DefaultTableModel) tablePecas.getModel();
+        tablePecas.setRowSorter(new TableRowSorter(modelo));
+        modelo.setNumRows(0);
+        osc.TablePecasSelecionadas(modelo, 0);
+        hoje = LocalDate.now();
+        agora = LocalTime.now();
+        data.setText("" + hoje);
+        hora.setText("" + agora);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_funcionarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
     private javax.swing.JTextField cliente;
     private javax.swing.JTextField data;
     private javax.swing.JTextArea desc_problema;
@@ -459,8 +589,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     private javax.swing.JTextField funcionario;
     private javax.swing.JTextField hora;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -482,11 +611,13 @@ public class TelaOS extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField num_os;
+    private javax.swing.JTextField pecas;
+    private javax.swing.JButton reset;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTable tablePecas;
     private javax.swing.JTextField total;
     private javax.swing.JTextField valorServico;
+    private javax.swing.JButton verTabela;
     // End of variables declaration//GEN-END:variables
 }

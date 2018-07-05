@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import sqlbackup.MySQLBackup;
 import java.sql.*; // para o relatorio
+import model.Usuario;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -39,8 +40,11 @@ public class Home extends javax.swing.JFrame {
     TelaProduto addTelaProduto = new TelaProduto();
     TelaOS addTelaOS = new TelaOS();
     
-    public Home() {
+    public Home(Usuario u) {
         initComponents();
+        
+        //----------------------------- BEM VINDO USUARIO + USUARIO +
+        usuarioHome.setText(u.getNome());
         
         onClick(botao1);
         indicador1.setOpaque(true);
@@ -77,7 +81,7 @@ public class Home extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         indicador3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        usuarioHome = new javax.swing.JLabel();
         botao6 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         indicador6 = new javax.swing.JPanel();
@@ -262,10 +266,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-usuário-masculino-tipo-de-pele-com-círculo-6-48.png"))); // NOI18N
-        jLabel11.setText("Administrador");
+        usuarioHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        usuarioHome.setForeground(new java.awt.Color(0, 102, 102));
+        usuarioHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-usuário-masculino-tipo-de-pele-com-círculo-6-48.png"))); // NOI18N
+        usuarioHome.setText("Administrador");
 
         botao6.setBackground(new java.awt.Color(242, 242, 242));
         botao6.setPreferredSize(new java.awt.Dimension(230, 45));
@@ -372,7 +376,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(botao6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usuarioHome, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -387,7 +391,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel11)))
+                        .addComponent(usuarioHome)))
                 .addGap(40, 40, 40)
                 .addComponent(botao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
@@ -803,6 +807,7 @@ public class Home extends javax.swing.JFrame {
         
         addTelaCliente.dispose(); // dispensa tela de clientes se estiver ativa
         addTelaProduto.dispose();
+        addTelaOS.dispose(); // dispensa tela OS
         jPanel2.setVisible(false); // esconde home
         
         onClick(botao2);
@@ -1061,7 +1066,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Home(null).setVisible(true);
             }
         });
     }
@@ -1082,7 +1087,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -1116,5 +1120,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel usuarioHome;
     // End of variables declaration//GEN-END:variables
 }

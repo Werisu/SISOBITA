@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Produto;
 
 public class OsDAO {
     
@@ -48,6 +49,7 @@ public class OsDAO {
     
     public void addPecasOS(int produto, int os){
         String sql = "INSERT INTO tbl_produtos_has_tbl_os (tbl_produtos_id,tbl_os_num_os) VALUES (?,?);";
+        
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, produto);
@@ -57,6 +59,27 @@ public class OsDAO {
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+    }
+    
+    public int pegaUltimoNumOS(){
+        String sql2 = "SELECT `Auto_increment` as cod FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'sisobita' AND TABLE_NAME = 'tbl_os';";
+        
+        ArrayList<Integer> num = new ArrayList();
+        int num_os = 0;
+        
+        try {
+            PreparedStatement stmt2 = connection.prepareStatement(sql2);
+            ResultSet rs = stmt2.executeQuery();
+            while(rs.next()){
+                num.add(rs.getInt("cod"));
+            }
+            num_os = num.get(0);
+            stmt2.close();
+            rs.close();
+        } catch (SQLException ex) {
+           throw new RuntimeException("O problema está em: " +ex.getMessage());
+        }
+        return num_os;
     }
     
     public ArrayList<OS> procuraOS(){
@@ -76,6 +99,26 @@ public class OsDAO {
         }
         
         return os;
+    }
+    
+    public ArrayList<Produto> ProcuraPeca(int cod){
+        String sql = "SELECT * FROM tbl_produtos WHERE id = ?;";
+        ArrayList<Produto> produto = new ArrayList();
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, cod);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+               produto.add(new Produto(rs.getInt("id"), rs.getString("nome"), rs.getInt("quantidade"), rs.getDouble("valor")));
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        
+        return produto;
     }
     
 }

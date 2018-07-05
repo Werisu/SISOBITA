@@ -54,6 +54,11 @@ public class UsuarioController {
         
     }
     
+    public void concluirAtualizacao(int id, String nome, String senha){
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.atualizarDados(id, nome, senha);
+    }
+    
     public void search(javax.swing.JComboBox box){
         
         box.removeAllItems();

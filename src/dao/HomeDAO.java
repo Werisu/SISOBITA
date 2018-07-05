@@ -40,6 +40,8 @@ public class HomeDAO {
                 dados[3] = rs.getString("os.total");
                 modelo.addRow(dados);
             }
+            stmt.close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(HomeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -62,4 +62,11 @@ public class ClienteController {
             box.addItem(costume);
         }
     }
+    
+    public Cliente pegaCliente(int idDoCliente){
+        ClienteDAO dao = new ClienteDAO();
+        Cliente custume = dao.SelecionaCliente(idDoCliente);
+        
+        return custume;
+    }
 }
