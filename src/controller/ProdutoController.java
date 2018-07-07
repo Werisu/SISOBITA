@@ -44,4 +44,9 @@ public class ProdutoController {
         }
     }
     
+    public void imprimirRelatorio(){
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.ReportProducts();
+    }
+    
 }

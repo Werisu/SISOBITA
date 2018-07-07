@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportProdutos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="688cb5c0-ce8b-496b-9d61-4205c32c8a32">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM tbl_produtos]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantidade" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="48" height="48" uuid="3f8e37a6-5b7d-4bf8-8b50-9278454d50e4"/>
+				<imageExpression><![CDATA["C:\\Users\\Wellysson\\Documents\\NetBeansProjects\\OficinaDeBicicleta\\src\\view\\images\\48px\\icons8-ciclismo-de-estrada-48.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="48" y="0" width="507" height="28" uuid="a1368ea2-8cc3-416b-ac3f-8918dd9e2f66"/>
+				<textElement>
+					<font fontName="Segoe UI" size="18"/>
+				</textElement>
+				<text><![CDATA[SISOBITA - SISTEMA DE OFICINA DE BICICLETA]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="28" width="100" height="20" uuid="5f5e02fa-25fe-4aab-a8ba-45fb59b0109b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="28" width="407" height="20" forecolor="#666666" uuid="082d9242-ac5b-41cc-b72e-abe93172f9d1"/>
+				<text><![CDATA[DBA: WELLYSSON NASCIMENTO ROCHA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="fbcacbce-ff0f-43ec-999c-e34573e842da"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<text><![CDATA[RELAÇÃO DE PRODUTOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="60c5e057-1e80-4e73-a79b-3e96745905d3"/>
+				<textElement>
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD. DO PRODUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="0" width="239" height="20" uuid="042e533e-c5e1-4f13-9789-42e15d2601b5"/>
+				<textElement>
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME/DESCRIÇÃO DO PRODUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="0" width="100" height="20" uuid="7c19c3e8-b148-4618-bf50-e394913f86ae"/>
+				<textElement>
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE UNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="0" width="69" height="20" uuid="ebb829ec-b42c-41d4-aec9-8c505da90fd5"/>
+				<textElement>
+					<font fontName="Segoe UI" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR UNI]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="31" width="550" height="1" uuid="64f15def-028a-496e-ad16-690d1a10d12d"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="46527093-a793-4b06-8f1e-20aa429bbd87"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="0" width="239" height="20" uuid="462b968a-1d9c-4a53-96b9-2a96db788855"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="100" height="20" uuid="0d1f376a-eb63-4276-9c56-467022c99f67"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="69" height="20" uuid="cf8c9d58-511e-4012-8a1c-92dd981bf84a"/>
+				<textElement>
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" forecolor="#CCCCCC" uuid="d8f01e64-e0dc-4442-93b4-b7072315a568"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="452" y="34" width="100" height="20" uuid="4e8c616d-74bf-41ab-a7af-c3f900d802be"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="34" width="100" height="20" uuid="3b733ace-4108-4b3e-a970-6a38c042403b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

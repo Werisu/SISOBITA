@@ -17,6 +17,11 @@ import java.sql.PreparedStatement; // importanto o prepared Statement
 import java.util.ArrayList; // importanto o arraylist
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class ClienteDAO {
     
@@ -49,6 +54,51 @@ public class ClienteDAO {
             return "Cliente " + cliente.getNome() + "cadastrado com sucesso";
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar cliente: " + e);
+        }
+    }
+    
+    /**
+     * Método para atualizar os dados do cliente
+     * @param cliente é passado como parâmetro para buscar os dados alterados
+     */
+    public void atualizarCliente(Cliente cliente){
+        String sql = "UPDATE tbl_cliente SET nome_completo=?, telefone=?, endereco =? WHERE id=?;";
+        
+        int confirmar = JOptionPane.showConfirmDialog(null, "Atualizar dados do cliente "+cliente.getNome()+"?", "Atenção",JOptionPane.YES_NO_OPTION);
+        
+        if(confirmar == JOptionPane.YES_OPTION){
+            try {
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1, cliente.getNome());
+                stmt.setString(2, cliente.getTelefone());
+                stmt.setString(3, cliente.getEndereco());
+                stmt.setInt(4, cliente.getId());
+                stmt.execute();
+                stmt.close();
+                JOptionPane.showMessageDialog(null, "Dados atualizados!");
+            } catch (SQLException ex) {
+                throw new RuntimeException("Erro ao cadastrar cliente: " + ex.getMessage());
+            }
+        }
+    }
+    
+    public void deleteCliente(Cliente cliente){
+        String sql = "DELETE FROM `tbl_cliente` WHERE `tbl_cliente`.`id` = ?;";
+        
+        int confirmar = JOptionPane.showConfirmDialog(null, "Deletar cliente "+cliente.getNome()+"?", "Atenção!", JOptionPane.YES_NO_OPTION);
+        
+        if(confirmar == JOptionPane.YES_OPTION){
+           PreparedStatement stmt;
+            try {
+                stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, cliente.getId());
+                stmt.execute();
+                stmt.close();
+                JOptionPane.showMessageDialog(null, "Cliente deletado!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao deletar cliente: "+ex.getMessage());
+                throw new RuntimeException("Erro ao deletar cliente: " + ex.getMessage());
+            }
         }
     }
     
@@ -98,6 +148,24 @@ public class ClienteDAO {
         
         
         return cliente;
+    }
+    
+    public void reportCostume(){
+        // gerar relatorio
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirmar Impressão relatório de Clientes?", "Atenção",JOptionPane.YES_NO_OPTION);
+        
+        if(confirma == JOptionPane.YES_OPTION){
+            // imprimindo relatório com o framework JasperReports
+            try {
+                // Usando a classe JasperPrint para preparar a impressão de um relatório
+                JasperPrint print = JasperFillManager.fillReport("src/reports/report1.jasper", null, connection);
+                
+                // A seguir exibe o relatório através da classe JasperViewer
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }
     
 }

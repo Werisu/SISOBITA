@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0502cb03-2351-44a2-851a-ff30a0452355">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Fri Jul 06 08:49:19 ACT 2018\ncallouts.1.text=\ncallouts.1.bounds=613,125,150,75"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="0e6d1b82-2ecb-42d9-b13c-25a96a7c12d4"/>
+	<queryString>
+		<![CDATA[SELECT * FROM tbl_cliente]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_completo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="48" height="48" uuid="897f4a38-fb90-43b1-a845-2ad1ffbfa286"/>
+				<imageExpression><![CDATA["C:\\Users\\Wellysson\\Documents\\NetBeansProjects\\OficinaDeBicicleta\\src\\view\\images\\48px\\icons8-ciclismo-de-estrada-48.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="48" y="13" width="228" height="25" uuid="40482e3f-8147-4e8c-9a05-15cd4d955ce9"/>
+				<textElement>
+					<font fontName="Segoe UI" size="18"/>
+				</textElement>
+				<text><![CDATA[SISOBITA - CLIENTES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="20" uuid="1ef0f8a6-892a-462b-8eaf-908b8347bd62"/>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="0" width="120" height="20" uuid="7a800c85-e41d-4400-87c7-9ed6eb29e223"/>
+				<text><![CDATA[CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="100" height="20" uuid="6b7932a1-63f4-4237-b2d2-9f9fa8f47ee1"/>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="0" width="234" height="20" uuid="ddfeb978-c762-47a1-bcc1-ff6f81cb8276"/>
+				<text><![CDATA[ENDEREÇO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="62" height="20" uuid="8de91cb0-bc9c-46dc-a27f-fef45534093b"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="0" width="120" height="20" uuid="47e2acc9-4ae4-4458-b980-54245220d4a0"/>
+				<textFieldExpression><![CDATA[$F{nome_completo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="340" y="16" width="100" height="1" forecolor="#FFFFFF" uuid="acd28ae7-cafb-42e3-a0a8-dccd73b85628"/>
+			</line>
+			<textField>
+				<reportElement x="205" y="1" width="100" height="20" uuid="a96a8e6f-7eca-4043-bf35-9f937b75a902"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="1" width="235" height="20" uuid="357ad0cf-f1be-4b3b-bd47-29758f6664ea"/>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="535" y="34" width="20" height="20" uuid="5e3a1854-c25a-436a-8611-5b0b7330c2fc"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="34" width="100" height="20" uuid="c54dd0e0-d628-4efc-9f06-52e68a55ec9f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

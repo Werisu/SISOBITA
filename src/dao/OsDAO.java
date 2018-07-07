@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 public class OsDAO {
@@ -119,6 +120,29 @@ public class OsDAO {
         }
         
         return produto;
+    }
+    
+    public ArrayList OsConcluidos(DefaultTableModel modelo){
+        String sql = "SELECT o.num_os, o.data, o.total, o.status, c.id, c.nome_completo FROM tbl_os o JOIN tbl_cliente c ON o.cliente = c.id WHERE status = 'Concluido';";
+        ArrayList os = new ArrayList();
+        
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                String[] dados = new String[4];
+                dados[0] = rs.getString("o.num_os");
+                dados[1] = rs.getString("o.data");
+                dados[2] = rs.getString("o.total");
+                dados[3] = rs.getString("o.status");
+                dados[4] = rs.getString("c.id");
+                dados[5] = rs.getString("c.nome_completo");
+                modelo.addRow(dados);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return os;
     }
     
 }

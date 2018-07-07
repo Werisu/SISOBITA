@@ -21,7 +21,7 @@ public class ConnectionFactory {
             // banco de dados sisobita
             return DriverManager.getConnection("jdbc:mysql://localhost/sisobita", "root", "");
         } catch (SQLException ex) {
-            throw new RuntimeException("Falha na conexão" + ex);
+            throw new RuntimeException("Falha na conexão: " + ex.getMessage());
         }
     }
     

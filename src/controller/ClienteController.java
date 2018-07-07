@@ -30,6 +30,18 @@ public class ClienteController {
         }
     }
     
+    public void AtualizarCliente(String nome, String endereco, String telefone, int id){
+        ClienteDAO dao = new ClienteDAO();
+        Cliente cliente = new Cliente(id, nome, endereco, telefone);
+        dao.atualizarCliente(cliente);
+    }
+    
+    public void DeletarCliente(String nome, String endereco, String telefone, int id){
+        Cliente cliente = new Cliente(id, nome, endereco, telefone);
+        ClienteDAO dao = new ClienteDAO();
+        dao.deleteCliente(cliente);
+    }
+    
     public void removeCliente(Cliente cliente){
         int isDelete = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o usuário " + cliente.getNome() + "?");
         
@@ -68,5 +80,10 @@ public class ClienteController {
         Cliente custume = dao.SelecionaCliente(idDoCliente);
         
         return custume;
+    }
+    
+    public void reportCliente(){
+       ClienteDAO dao = new ClienteDAO();
+       dao.reportCostume();
     }
 }

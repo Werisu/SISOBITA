@@ -5,23 +5,21 @@
  */
 package view;
 
+import controller.ClienteController;
+import controller.ProdutoController;
 import controller.UsuarioController;
 import factory.ConnectionFactory;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
-import javax.swing.JFrame;
+import java.awt.Dimension; // pode ser deletado
+import javax.swing.JFrame; // pode ser deletado
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import sqlbackup.MySQLBackup;
-import java.sql.*; // para o relatorio
 import model.Usuario;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -29,11 +27,11 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Home extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Home
-     */
-    Connection conexao = null; // conexão para relatorio
+    
+    // Usuário Controller
     UsuarioController c = new UsuarioController();
+    // Cliente Controller
+    ClienteController cliente = new ClienteController();
     DefaultTableModel modelo;
     TelaUsuarios addTelaUser = new TelaUsuarios();
     TelaCliente addTelaCliente = new TelaCliente();
@@ -56,9 +54,6 @@ public class Home extends javax.swing.JFrame {
         
         
         jLabel9.setText(c.detalhes()); // pega a quatidade de usuários cadastrados
-        
-        //----------------------------- PARA GERAR O RELATORIO
-        this.conexao = new ConnectionFactory().getConnection();
     }
 
     /**
@@ -111,14 +106,18 @@ public class Home extends javax.swing.JFrame {
         imprimeRelatorioFuncionarioOS = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         botaobk = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        reportCliente = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISOBITA");
@@ -701,48 +700,10 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jMenu1.setForeground(new java.awt.Color(0, 102, 102));
-        jMenu1.setText("Usuarios");
-
-        jMenuItem1.setText("Cadastrar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setForeground(new java.awt.Color(0, 102, 102));
-        jMenu2.setText("Clientes");
-
-        jMenuItem2.setText("Cadastrar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setForeground(new java.awt.Color(0, 102, 102));
-        jMenu3.setText("Produtos");
-
-        jMenuItem3.setText("Cadastrar");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu3);
-
         jMenu4.setForeground(new java.awt.Color(0, 102, 102));
-        jMenu4.setText("Segurança");
+        jMenu4.setText("Arquivos");
 
+        botaobk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-backup-de-dados-16.png"))); // NOI18N
         botaobk.setText("Backup");
         botaobk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -751,7 +712,85 @@ public class Home extends javax.swing.JFrame {
         });
         jMenu4.add(botaobk);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-sair-16.png"))); // NOI18N
+        jMenuItem6.setText("Sair");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
         jMenuBar1.add(jMenu4);
+
+        jMenu1.setForeground(new java.awt.Color(0, 102, 102));
+        jMenu1.setText("Usuarios");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-mais-16.png"))); // NOI18N
+        jMenuItem1.setText("Cadastrar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-impressão-16.png"))); // NOI18N
+        jMenuItem4.setText("Relatório de Usuarios");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setForeground(new java.awt.Color(0, 102, 102));
+        jMenu2.setText("Clientes");
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-mais-16.png"))); // NOI18N
+        jMenuItem2.setText("Cadastrar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        reportCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-impressão-16.png"))); // NOI18N
+        reportCliente.setText("Relatório de Clientes");
+        reportCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(reportCliente);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setForeground(new java.awt.Color(0, 102, 102));
+        jMenu3.setText("Produtos");
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-mais-16.png"))); // NOI18N
+        jMenuItem3.setText("Cadastrar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-impressão-16.png"))); // NOI18N
+        jMenuItem5.setText("Relatório de Produtos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -881,23 +920,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_botao3MouseEntered
 
     private void imprimeRelatorioFuncionarioOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimeRelatorioFuncionarioOSActionPerformed
-        // gerar relatorio Funcionario e relação com OS
-        int confirma = JOptionPane.showConfirmDialog(null, "Confirmar Impressão deste relatório?", "Atenção",JOptionPane.YES_NO_OPTION);
-        
-        if(confirma == JOptionPane.YES_OPTION){
-            // imprimindo relatório com o framework JasperReports
-            
-            try {
-                // Usando a classe JasperPrint para preparar a impressão de um relatório
-                JasperPrint print = JasperFillManager.fillReport("src/reports/home.jasper", null, conexao);
-                
-                // A seguir exibe o relatório através da classe JasperViewer
-                JasperViewer.viewReport(print, false);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-        
+        c.ReportUsuariosOS();
     }//GEN-LAST:event_imprimeRelatorioFuncionarioOSActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -992,7 +1015,7 @@ public class Home extends javax.swing.JFrame {
             //Usuário clicou em Sim. Executar o código de backup.
             MySQLBackup app = new MySQLBackup();
         }else{
-            //Usuário clicou em não. Não executar nada.
+            JOptionPane.showMessageDialog(null, "Operação Cancelada!");
         }
     }//GEN-LAST:event_botaobkActionPerformed
 
@@ -1020,6 +1043,23 @@ public class Home extends javax.swing.JFrame {
         addTelaCliente.dispose(); // dispensa a tela de manter cliente
         addTelaOS.dispose();// dispensa a tela de OS
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+    //------------------------------------------ RELATÓRIO DE CLIENTES
+    private void reportClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportClienteActionPerformed
+        cliente.reportCliente();
+    }//GEN-LAST:event_reportClienteActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        c.ReportUsers();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ProdutoController pc = new ProdutoController();
+        pc.imprimirRelatorio();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(153,204,255));
@@ -1109,6 +1149,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1120,6 +1163,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem reportCliente;
     private javax.swing.JLabel usuarioHome;
     // End of variables declaration//GEN-END:variables
 }

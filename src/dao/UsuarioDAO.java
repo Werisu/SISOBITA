@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class UsuarioDAO {
     private Connection connection;
@@ -105,5 +109,43 @@ public class UsuarioDAO {
         }
         
         return usuario;   
+    }
+    
+    public void ReportUsersOS(){
+        // gerar relatorio Funcionario e relação com OS
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirmar Impressão deste relatório?", "Atenção",JOptionPane.YES_NO_OPTION);
+        
+        if(confirma == JOptionPane.YES_OPTION){
+            // imprimindo relatório com o framework JasperReports
+            
+            try {
+                // Usando a classe JasperPrint para preparar a impressão de um relatório
+                JasperPrint print = JasperFillManager.fillReport("src/reports/home.jasper", null, connection);
+                
+                // A seguir exibe o relatório através da classe JasperViewer
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+    
+    public void ReportUsers(){
+        // gerar relatorio Funcionario e relação com OS
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirmar Impressão relatório de usuários?", "Atenção",JOptionPane.YES_NO_OPTION);
+        
+        if(confirma == JOptionPane.YES_OPTION){
+            // imprimindo relatório com o framework JasperReports
+            
+            try {
+                // Usando a classe JasperPrint para preparar a impressão de um relatório
+                JasperPrint print = JasperFillManager.fillReport("src/reports/report3.jasper", null, connection);
+                
+                // A seguir exibe o relatório através da classe JasperViewer
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }
 }

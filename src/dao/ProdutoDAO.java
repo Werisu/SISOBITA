@@ -18,6 +18,10 @@ import java.util.ArrayList; // importando Array list para salvar os dados em uma
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class ProdutoDAO {
     
@@ -59,5 +63,19 @@ public class ProdutoDAO {
         }
         
         return produto;
+    }
+    
+    public void ReportProducts(){
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirmar impresão relatório de produtos?", "Atenção", JOptionPane.YES_NO_OPTION);
+        
+        if(confirma == JOptionPane.YES_OPTION){
+            try {
+                JasperPrint print = JasperFillManager.fillReport("src/reports/ReportProdutos.jasper", null, connection);
+                
+                JasperViewer.viewReport(print, false);
+            } catch (JRException ex) {
+                Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

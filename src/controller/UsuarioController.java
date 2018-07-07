@@ -101,4 +101,14 @@ public class UsuarioController {
         hdao.procuraDadosTableHome(modelo);
     }
     
+    public void ReportUsuariosOS(){
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.ReportUsersOS();
+    }
+    
+    public void ReportUsers(){
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.ReportUsers();
+    }
+    
 }

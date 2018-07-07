@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/view/TelaUsuarios.java</file>
             <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/model/Usuario.java</file>
+            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/dao/OsDAO.java</file>
             <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/view/Home.java</file>
-            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/view/Login.java</file>
-            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/controller/UsuarioController.java</file>
+            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/dao/HomeDAO.java</file>
+            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/view/TelaOS.java</file>
+            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/view/TelaCliente.java</file>
+            <file>file:/C:/Users/Wellysson/Documents/NetBeansProjects/OficinaDeBicicleta/src/view/TelaProduto.java</file>
         </group>
     </open-files>
 </project-private>
