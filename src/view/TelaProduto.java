@@ -6,6 +6,8 @@
 package view;
 
 import controller.ProdutoController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -26,10 +28,35 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     public TelaProduto() {
         initComponents();
         
+        //----------------------------- TABLE
         this.modelo = (DefaultTableModel) tableProdutos.getModel();
         tableProdutos.setRowSorter(new TableRowSorter(modelo));
         
         pc.verTabela(modelo);
+        
+        /**
+         * Captura os dados da tabela para editar ou excluir
+         */
+        tableProdutos.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e){
+                if(e.getClickCount() == 2){
+                    // captura a linha
+                    int p = tableProdutos.getSelectedRow();
+                    
+                    // captura o id da linha selecionada
+                    int idDoProduto = Integer.parseInt(tableProdutos.getValueAt(p, 0).toString());
+                    
+                    // passa pelo controller e chega no DAO para capturar o produto através do id selecionado
+                    Produto product = pc.pegaProduto(idDoProduto);
+                    
+                    id.setText("" + product.getId());
+                    nome.setText(product.getNome());
+                    quantidade.setText("" +product.getQuanditade());
+                    valor.setText("" +product.getValor());
+                }
+            }
+            
+        });
     }
 
     /**
@@ -53,7 +80,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         valor = new javax.swing.JTextField();
         botaoSalvar = new javax.swing.JButton();
         botaoLimpar = new javax.swing.JButton();
-        botaoLimpar1 = new javax.swing.JButton();
+        atualiza = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        printTble = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProdutos = new javax.swing.JTable();
@@ -66,6 +95,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Tela de Produtos");
+        setPreferredSize(new java.awt.Dimension(1035, 625));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 102));
@@ -107,12 +137,30 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             }
         });
 
-        botaoLimpar1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        botaoLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-confirmação-e-atualização-24.png"))); // NOI18N
-        botaoLimpar1.setText("Atualizar");
-        botaoLimpar1.addActionListener(new java.awt.event.ActionListener() {
+        atualiza.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        atualiza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-confirmação-e-atualização-24.png"))); // NOI18N
+        atualiza.setText("Atualizar");
+        atualiza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoLimpar1ActionPerformed(evt);
+                atualizaActionPerformed(evt);
+            }
+        });
+
+        delete.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/48px/icons8-lixo-24.fw.png"))); // NOI18N
+        delete.setText("Deletar");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
+        printTble.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        printTble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-impressão-16.png"))); // NOI18N
+        printTble.setText("Imprimir Tabela");
+        printTble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printTbleActionPerformed(evt);
             }
         });
 
@@ -144,11 +192,15 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoSalvar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botaoLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoLimpar1)
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atualiza)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(delete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(printTble)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +223,9 @@ public class TelaProduto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoLimpar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(atualiza, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(printTble, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -184,7 +238,15 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             new String [] {
                 "COD", "Produto", "Quantidade", "Valor Unitario R$"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableProdutos);
         if (tableProdutos.getColumnModel().getColumnCount() > 0) {
             tableProdutos.getColumnModel().getColumn(0).setMinWidth(50);
@@ -201,16 +263,17 @@ public class TelaProduto extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar Produto"));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -299,15 +362,34 @@ public class TelaProduto extends javax.swing.JInternalFrame {
         valor.setText("");
     }//GEN-LAST:event_botaoLimparActionPerformed
 
-    private void botaoLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimpar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoLimpar1ActionPerformed
+    private void atualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizaActionPerformed
+        pc.atualizarProduto(Integer.parseInt(id.getText()), nome.getText(), Integer.parseInt(quantidade.getText()), Double.parseDouble(valor.getText()));
+        
+        //----------------------------- RECARREGA TABLE
+        tableProdutos.setRowSorter(new TableRowSorter(this.modelo));
+        pc.verTabela(modelo);
+    }//GEN-LAST:event_atualizaActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // Botão de delete
+        pc.deleteProduto(Integer.parseInt(id.getText()), nome.getText(), Integer.parseInt(quantidade.getText()), Double.parseDouble(valor.getText()));
+        
+         //----------------------------- RECARREGA TABLE
+        tableProdutos.setRowSorter(new TableRowSorter(this.modelo));
+        pc.verTabela(modelo);
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void printTbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printTbleActionPerformed
+        // Imprimir tabela de produtos
+        pc.imprimirRelatorio();
+    }//GEN-LAST:event_printTbleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atualiza;
     private javax.swing.JButton botaoLimpar;
-    private javax.swing.JButton botaoLimpar1;
     private javax.swing.JButton botaoSalvar;
+    private javax.swing.JButton delete;
     private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -322,6 +404,7 @@ public class TelaProduto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nome;
+    private javax.swing.JButton printTble;
     private javax.swing.JTextField quantidade;
     private javax.swing.JTable tableProdutos;
     private javax.swing.JTextField valor;

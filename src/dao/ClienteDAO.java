@@ -58,7 +58,7 @@ public class ClienteDAO {
     }
     
     /**
-     * Método para atualizar os dados do cliente
+     * Método para atualizar os dados do cliente no banco de dados
      * @param cliente é passado como parâmetro para buscar os dados alterados
      */
     public void atualizarCliente(Cliente cliente){
@@ -75,13 +75,17 @@ public class ClienteDAO {
                 stmt.setInt(4, cliente.getId());
                 stmt.execute();
                 stmt.close();
-                JOptionPane.showMessageDialog(null, "Dados atualizados!");
+                JOptionPane.showMessageDialog(null, "Cliente atualizado!");
             } catch (SQLException ex) {
                 throw new RuntimeException("Erro ao cadastrar cliente: " + ex.getMessage());
             }
         }
     }
     
+    /**
+     * Esse método deleta, do banco de dados o cliente selecionado
+     * @param cliente 
+     */
     public void deleteCliente(Cliente cliente){
         String sql = "DELETE FROM `tbl_cliente` WHERE `tbl_cliente`.`id` = ?;";
         

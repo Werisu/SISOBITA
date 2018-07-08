@@ -37,6 +37,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         
         c.verTabela(modelo); // pega a tabela de usuários lá no controller
         
+        /**
+         * Captura os dados na tabela com duplo clique
+         */
         tableClientes.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
               if(e.getClickCount() == 2){
@@ -45,7 +48,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                   int p = tableClientes.getSelectedRow();
                   
                   int idDoCliente = Integer.parseInt(tableClientes.getValueAt(p, 0).toString());
-                  System.out.println(idDoCliente);
+                  //System.out.println(idDoCliente);
                   
                   Cliente custume = c.pegaCliente(idDoCliente);
                   
@@ -83,9 +86,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         endereco = new javax.swing.JTextField();
         atualizar = new javax.swing.JButton();
         delete = new javax.swing.JButton();
+        printTabela = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableClientes = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,6 +191,15 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        printTabela.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        printTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-impressão-16.png"))); // NOI18N
+        printTabela.setText("Imprimir Tabela");
+        printTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printTabelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -210,6 +224,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addComponent(atualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(printTabela)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +263,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(printTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Clientes"));
@@ -275,21 +292,27 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             tableClientes.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Clique duas vezes no cliente da tabela para editar os dados");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -370,6 +393,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         c.verTabela(this.modelo);
     }//GEN-LAST:event_deleteActionPerformed
 
+    private void printTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printTabelaActionPerformed
+        c.reportCliente();
+    }//GEN-LAST:event_printTabelaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizar;
@@ -381,6 +408,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -388,6 +416,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nome;
+    private javax.swing.JButton printTabela;
     private javax.swing.JLabel rotuloEndereco;
     private javax.swing.JTable tableClientes;
     private javax.swing.JFormattedTextField telefone;

@@ -713,7 +713,7 @@ public class Home extends javax.swing.JFrame {
         jMenu4.add(botaobk);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/16px/icons8-sair-16.png"))); // NOI18N
-        jMenuItem6.setText("Sair");
+        jMenuItem6.setText("Fazer Backup e Sair");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -1058,6 +1058,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        MySQLBackup app = new MySQLBackup();
         System.exit(0);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 

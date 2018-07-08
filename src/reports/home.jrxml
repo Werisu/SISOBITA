@@ -22,48 +22,59 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="58" splitType="Stretch">
+		<band height="95" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="386" height="40" uuid="7b2f4961-07e5-4a62-a3b9-2f0bd46027e3"/>
+				<reportElement x="48" y="2" width="507" height="28" uuid="813c072d-0ebd-44e3-8b20-c2f006ca0b7f"/>
 				<textElement>
-					<font size="22"/>
+					<font fontName="Segoe UI" size="18"/>
 				</textElement>
-				<text><![CDATA[Relatório: relação de funcionarios e OS]]></text>
+				<text><![CDATA[SISOBITA - SISTEMA DE OFICINA DE BICICLETA]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="455" y="0" width="100" height="20" uuid="ae2fab1a-34b8-4eca-886c-50a21e8e9cc0"/>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="30" width="100" height="20" uuid="846c4454-00e8-49ab-b7f9-7bec04ee4f17"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="48" y="30" width="407" height="20" forecolor="#666666" uuid="800242a5-dfa1-4925-9f5d-83e194743d06"/>
+				<text><![CDATA[DBA: WELLYSSON NASCIMENTO ROCHA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="48" height="48" uuid="67e99169-b813-44a2-afb8-1fd1d5c64e13"/>
+				<imageExpression><![CDATA["C:\\Users\\Wellysson\\Documents\\NetBeansProjects\\OficinaDeBicicleta\\src\\view\\images\\48px\\icons8-ciclismo-de-estrada-48.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="9675070b-c768-44bd-a32a-6a8b4a8101a6"/>
+				<reportElement x="0" y="0" width="212" height="20" uuid="9675070b-c768-44bd-a32a-6a8b4a8101a6"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Funcionario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="100" height="20" uuid="384af1da-a5fd-4676-b1dd-1b0e723aabe8"/>
+				<reportElement x="225" y="0" width="100" height="20" uuid="384af1da-a5fd-4676-b1dd-1b0e723aabe8"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Numero OS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="100" height="20" uuid="8426003d-cb20-4425-bf12-ee23ffcec11f"/>
+				<reportElement x="342" y="0" width="100" height="20" uuid="8426003d-cb20-4425-bf12-ee23ffcec11f"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
+			<line>
+				<reportElement x="3" y="18" width="550" height="1" uuid="aa1e0d85-96eb-427d-9148-02b79ba513b7"/>
+			</line>
 			<staticText>
-				<reportElement x="300" y="0" width="100" height="20" uuid="ae1bb75b-773e-4910-b5c0-b525f304b727"/>
+				<reportElement x="453" y="0" width="100" height="20" uuid="ae1bb75b-773e-4910-b5c0-b525f304b727"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -74,19 +85,19 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="d265aa1e-97a9-4c7e-9813-7efc248793c3"/>
+				<reportElement x="0" y="0" width="212" height="20" uuid="d265aa1e-97a9-4c7e-9813-7efc248793c3"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="e880debc-d65b-4dba-9c20-70d259b2f975"/>
+				<reportElement x="225" y="0" width="100" height="20" uuid="e880debc-d65b-4dba-9c20-70d259b2f975"/>
 				<textFieldExpression><![CDATA[$F{num_os}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="251c7d80-42f5-4cd2-a69f-6b28f97555fe"/>
+				<reportElement x="342" y="0" width="100" height="20" uuid="251c7d80-42f5-4cd2-a69f-6b28f97555fe"/>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="63c1798d-9bd8-48b3-b590-0caca07accad"/>
+				<reportElement x="453" y="0" width="100" height="20" uuid="63c1798d-9bd8-48b3-b590-0caca07accad"/>
 				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -98,7 +109,12 @@
 		<band height="54" splitType="Stretch">
 			<textField>
 				<reportElement x="455" y="0" width="100" height="20" uuid="5bca3e93-93b2-41ab-9b7d-c83469bf60bf"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="3" y="0" width="100" height="20" uuid="4c184137-2137-48e1-9212-d83394045207"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
